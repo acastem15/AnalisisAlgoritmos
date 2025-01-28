@@ -1,0 +1,7 @@
+origen,destino,costo
+Bogotá,Medellín,6
+Bogotá,Cali,5
+Medellín,Barranquilla,9
+Barranquilla,Cali,4
+Medellín,Cali,3
+Bogotá,Barranquilla,8

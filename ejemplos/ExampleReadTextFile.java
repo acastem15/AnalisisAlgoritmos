@@ -3,13 +3,13 @@ import java.io.FileReader;
 import java.util.ArrayList;
 
 public class ExampleReadTextFile {
-s
+
 	public static void main(String[] args)  throws Exception {
 		String filename = args[0];
 		ArrayList<Double> numbers = new ArrayList<>();
 		
 		try (FileReader reader = new FileReader(filename);
-			 BufferedReader in = new BufferedReader(reader)) {
+			BufferedReader in = new BufferedReader(reader)) {
 			String line = in.readLine();
 			while (line != null) {
 				numbers.add(Double.parseDouble(line));
