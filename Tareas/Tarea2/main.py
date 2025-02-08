@@ -13,12 +13,12 @@ if __name__ == "__main__":
     
     inicio_ek = time.time()
     grafo = EdmonsKarpGraph()
-    max_flow_ek = grafo.llenar_grafo_edmonsKarp(ruta_entrada=entrada)  
+    max_flow_ek = grafo.llenar_grafo_edmonsKarp(ruta_entrada=entrada, imprimir_resultados=False)  
     fin_ek = time.time()    
     
     inicio_pr = time.time()
     grafo = PushRelabelGraph()
-    max_flow_pr = grafo.llenar_grafo_pushrelabel(ruta_entrada=entrada)
+    max_flow_pr = grafo.llenar_grafo_pushrelabel(ruta_entrada=entrada, imprimir_resultados=False)
     fin_pr = time.time()
     
     print("\n----------- Edmons-Karp -----------")
