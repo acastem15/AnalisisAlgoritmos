@@ -31,7 +31,8 @@ class EdmonsKarpGraph(DirectedWeightedGraph):
 
             maxFlow  += flujoCamino #sumo el flujo del camino aumentante al máximo
             
-        if imprimir_resultados:    
+        if imprimir_resultados: 
+            print('\nEdmons-Karp')   
             for u in self.grafo:
                 for v, datos in self.grafo[u].items():
                     if "original" in datos and datos["original"]:

@@ -74,6 +74,7 @@ class PushRelabelGraph(DirectedWeightedGraph):
         max_flow = excess[destino]
 
         if imprimir_resultados:
+            print('\nPush-Relabel')
             for u in self.grafo:
                 for v in self.grafo[u]:
                     if self.grafo[u][v]['original']:
