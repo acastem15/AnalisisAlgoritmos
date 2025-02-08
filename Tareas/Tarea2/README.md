@@ -76,5 +76,5 @@ El programa verifica que no existan ejes antiparalelos (ejes en ambas direccione
 
 ## Notas Adicionales
 - **Nodos fuente y destino**: El nodo fuente siempre es `0` y el destino es `N-1`.
-- **Eficiencia**: El algoritmo Push-Relabel suele ser más eficiente en grafos densos. Considerando que la complejidad de Edmonds-Karp es O(V·E²) y la de Push-Relabel es O(V³), en un grafo denso donde E ≈ V², la complejidad de Edmonds-Karp se aproxima a O(V⁵), siendo mayor que la de Push-Relabel. Por lo tanto, en estos casos, Push-Relabel podría representar una mejor opción computacional.
+- **Eficiencia**: El algoritmo Push-Relabel suele ser más eficiente en grafos densos. Considerando que la complejidad de Edmonds-Karp es O(V·E²) y la de Push-Relabel es O(V²·E), en un grafo denso donde E ≈ V², la complejidad de Edmonds-Karp se aproxima a O(V⁵), siendo mayor que la de Push-Relabel. Por lo tanto, en estos casos, Push-Relabel podría representar una mejor opción computacional.
 - **Compatibilidad**: El programa funciona en cualquier sistema operativo con Python 3 instalado.

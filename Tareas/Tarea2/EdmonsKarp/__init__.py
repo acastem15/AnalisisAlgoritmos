@@ -5,7 +5,7 @@ class EdmonsKarpGraph(DirectedWeightedGraph):
     def __init__(self):
         DirectedWeightedGraph.__init__(self)
         
-    def edmonsKarp_algorithm (self, fuente, destino):
+    def edmonsKarp_algorithm (self, fuente, destino, imprimir_resultados=False):
         maxFlow = 0 # inicializo flujo máximo en 0
         precede = {} # guarda camino en 0
 
@@ -30,16 +30,19 @@ class EdmonsKarpGraph(DirectedWeightedGraph):
                 v = u
 
             maxFlow  += flujoCamino #sumo el flujo del camino aumentante al máximo
-
-        for u in self.grafo:
-            for v, datos in self.grafo[u].items():
-                if "original" in datos and datos["original"]:
-                    print(str(u)+" "+str(v)+" "+str(datos["flujo"]))
-        print("\nFlujo Máximo: "+str(maxFlow))
+            
+        if imprimir_resultados:    
+            for u in self.grafo:
+                for v, datos in self.grafo[u].items():
+                    if "original" in datos and datos["original"]:
+                        print(str(u)+" "+str(v)+" "+str(datos["flujo"]))
+            #print("\nFlujo Máximo: "+str(maxFlow))
+        
+        return maxFlow
         
         
         
-    def llenar_grafo_edmonsKarp(self, ruta_entrada):
+    def llenar_grafo_edmonsKarp(self, ruta_entrada, imprimir_resultados=False):
         '''Llena la matriz de adyacencia a partir del archivo de entrada'''
 
         with open(ruta_entrada) as archivo:
@@ -47,10 +50,11 @@ class EdmonsKarpGraph(DirectedWeightedGraph):
         
         destino =  int(lineas[0].strip()) - 1
         fuente = 0
-        #grafo = EdmonsKarpGraph()
 
         for linea in lineas[1:]:
             u,v,capacidad = map(int, linea.split())
             self.addEdge(u,v,capacidad)
 
-        self.edmonsKarp_algorithm(fuente, destino)
+        max_flow = self.edmonsKarp_algorithm(fuente, destino, imprimir_resultados=imprimir_resultados)
+        
+        return max_flow
