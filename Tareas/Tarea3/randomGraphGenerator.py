@@ -24,21 +24,23 @@ def graphGenerator(n, archivo_salida):
             if randVertex != v and (randVertex not in graph[v]): 
                 graph[v].append(randVertex)
                 graph[randVertex].append(v)
-                edge = str(v)+" "+str(randVertex)+"\n"
+                edge = str(v)+","+str(randVertex)+"\n"
                 f.write(edge)
             edgesV=len(graph[v])
 
     #print(realEdges)
     #Code to build graph with exactly 3*V-6
+    """
     while realEdges<maxEdgesPlanar: 
         randVertex = random.randint(0,n-1)
         randVertex2 = random.randint(0,n-1)
         if randVertex2 != randVertex and (randVertex not in graph[randVertex2]): 
                 graph[randVertex2].append(randVertex)
                 graph[randVertex].append(randVertex2)
-                edge = str(randVertex)+" "+str(randVertex2)+"\n"
+                edge = str(randVertex)+","+str(randVertex2)+"\n"
                 f.write(edge)
                 realEdges+=1
+    """
 
 
 
@@ -46,6 +48,6 @@ def graphGenerator(n, archivo_salida):
     f.close()
     
 
-numEdges = 1000
-archivoSalida = "graph_"+str(numEdges)+".txt"
+numEdges = 20
+archivoSalida = "./noComplete/graph_"+str(numEdges)+".csv"
 graphGenerator(numEdges, archivoSalida)
