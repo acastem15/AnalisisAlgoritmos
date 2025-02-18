@@ -5,6 +5,7 @@ def graphGenerator(n, archivo_salida):
     maxEdgesPlanar = 3*n-6 
     edges = set()
     existentes = set()  
+    #print(maxEdgesPlanar)
 
     graph = {}
     for v in range(0, n):
@@ -16,31 +17,34 @@ def graphGenerator(n, archivo_salida):
     for v in range(0, n):
 
         amountEdges = random.randint(1,maxEdgesPlanar//(n)) 
-        realEdges+=amountEdges   
+           
         edgesV = len(graph[v])
         #print(edgesV,amountEdges)
         while edgesV < amountEdges:
             randVertex = random.randint(0,n-1)
-            if randVertex != v and (randVertex not in graph[v]): 
+            if randVertex != v and (randVertex not in graph[v]) and (v not in graph[randVertex]): 
                 graph[v].append(randVertex)
                 graph[randVertex].append(v)
                 edge = str(v)+","+str(randVertex)+"\n"
                 f.write(edge)
+                realEdges+=1
             edgesV=len(graph[v])
 
     #print(realEdges)
     #Code to build graph with exactly 3*V-6
-    
+    #print(realEdges)
+    """
     while realEdges<maxEdgesPlanar: 
         randVertex = random.randint(0,n-1)
         randVertex2 = random.randint(0,n-1)
-        if randVertex2 != randVertex and (randVertex not in graph[randVertex2]): 
+        if randVertex2 != randVertex and (randVertex not in graph[randVertex2])and (randVertex2 not in graph[randVertex]): 
                 graph[randVertex2].append(randVertex)
                 graph[randVertex].append(randVertex2)
                 edge = str(randVertex)+","+str(randVertex2)+"\n"
                 f.write(edge)
                 realEdges+=1
-
+    print(realEdges)
+    """
 
 
 
@@ -49,5 +53,5 @@ def graphGenerator(n, archivo_salida):
     
 
 numEdges = 20
-archivoSalida = "graph_"+str(numEdges)+"_complete.csv"
+archivoSalida = "./noComplete/graph_"+str(numEdges)+".csv"
 graphGenerator(numEdges, archivoSalida)
