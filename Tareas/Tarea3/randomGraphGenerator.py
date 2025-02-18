@@ -1,9 +1,8 @@
 import random
 
-def graphGenerator(n, archivo_salida="graph_20.txt"):
+def graphGenerator(n, archivo_salida):
 
     maxEdgesPlanar = 3*n-6 
-    print("maxeDGESpLANAR",maxEdgesPlanar)
     edges = set()
     existentes = set()  
 
@@ -19,7 +18,7 @@ def graphGenerator(n, archivo_salida="graph_20.txt"):
         amountEdges = random.randint(1,maxEdgesPlanar//(n)) 
         realEdges+=amountEdges   
         edgesV = len(graph[v])
-        print(edgesV,amountEdges)
+        #print(edgesV,amountEdges)
         while edgesV < amountEdges:
             randVertex = random.randint(0,n-1)
             if randVertex != v and (randVertex not in graph[v]): 
@@ -29,23 +28,24 @@ def graphGenerator(n, archivo_salida="graph_20.txt"):
                 f.write(edge)
             edgesV=len(graph[v])
 
-    print(realEdges)
+    #print(realEdges)
     #Code to build graph with exactly 3*V-6
     while realEdges<maxEdgesPlanar: 
         randVertex = random.randint(0,n-1)
         randVertex2 = random.randint(0,n-1)
         if randVertex2 != randVertex and (randVertex not in graph[randVertex2]): 
                 graph[randVertex2].append(randVertex)
-                graph[randVertex2].append(randVertex)
+                graph[randVertex].append(randVertex2)
                 edge = str(randVertex)+" "+str(randVertex2)+"\n"
                 f.write(edge)
                 realEdges+=1
 
 
 
-    print(realEdges)
+    #print(realEdges)
     f.close()
     
 
-numEdges = 20 
-graphGenerator(numEdges)
+numEdges = 1000
+archivoSalida = "graph_"+str(numEdges)+".txt"
+graphGenerator(numEdges, archivoSalida)
