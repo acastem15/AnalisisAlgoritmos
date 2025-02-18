@@ -30,7 +30,7 @@ def graphGenerator(n, archivo_salida):
 
     #print(realEdges)
     #Code to build graph with exactly 3*V-6
-    """
+    
     while realEdges<maxEdgesPlanar: 
         randVertex = random.randint(0,n-1)
         randVertex2 = random.randint(0,n-1)
@@ -40,7 +40,7 @@ def graphGenerator(n, archivo_salida):
                 edge = str(randVertex)+","+str(randVertex2)+"\n"
                 f.write(edge)
                 realEdges+=1
-    """
+
 
 
 
@@ -49,5 +49,5 @@ def graphGenerator(n, archivo_salida):
     
 
 numEdges = 20
-archivoSalida = "./noComplete/graph_"+str(numEdges)+".csv"
+archivoSalida = "graph_"+str(numEdges)+"_complete.csv"
 graphGenerator(numEdges, archivoSalida)
