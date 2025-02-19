@@ -2,7 +2,7 @@ import math
 
 def generate_planar_graph(n):
     """
-    Genera un grafo planar con n vértices mediante una construcción modular de subciclos conectados.
+    Genera un grafo planar con n vértices mediante una generación modular de subciclos conectados.
 
     La construcción se realiza en tres pasos:
 
