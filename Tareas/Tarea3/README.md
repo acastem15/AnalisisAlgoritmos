@@ -13,10 +13,10 @@ pip install networkx[default]
 ## Estructura del Proyecto
 ```
 .
-├── punto1/            
+├── punto1/            #implementación de planar graphs
 │   └── results/     # Resultados a partir del script de python
 |   └── planaraGraphGenerator.py # Implementación algoritmo que genera grafos planares
-├── punto2/           # Implementación del algoritmo Push-Relabel
+├── punto2/           # Implementación de random graphs
 │   └── results/    #Grafos generados con numIt = 5,step = 5 desde 19 a 54 ejes
 |   └── randomGraphGenerator.py #Algoritmo de grafos aleatorios ( no necesariamente planares)
 
