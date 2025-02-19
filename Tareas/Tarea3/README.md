@@ -24,13 +24,13 @@ pip install networkx[default]
 
 ## Uso del Programa
 1. **Ejecución básica - randomGraphGenerator**:
-    numIt (int):Número de grafos que se generar por cada número de eje (cuando fixedEdges es True)
-    numVertex (int):Número de vertices en el grafo (se genera de 0 a numVertex-1)
-    maxEdges (int):Máximo número de ejes permitidos en el grafo
-    step (int): Paso entre número de ejes
-    fixedEdges(bool): Booleano que indica si se desea generar un grafo con número aleatorio de ejes entre 0,maxEdges, o con exactamente maxEdges (True).
-    writeGraphs(bool):Booleano que indica se se desea o no escribir un .csv con los grafos generados
-    writePr (bool): Booleano que indica si se desea o no escribir un .csv con los resultados de planaridad de los grafos generados junto con su probabilidad por eje de ser planar.
+    - numIt (int):Número de grafos que se generar por cada número de eje (cuando fixedEdges es True)
+    - numVertex (int):Número de vertices en el grafo (se genera de 0 a numVertex-1)
+    - maxEdges (int):Máximo número de ejes permitidos en el grafo
+    - step (int): Paso entre número de ejes
+    - fixedEdges(bool): Booleano que indica si se desea generar un grafo con número aleatorio de ejes entre 0,maxEdges, o con exactamente maxEdges (True).
+    - writeGraphs(bool):Booleano que indica se se desea o no escribir un .csv con los grafos generados
+    - writePr (bool): Booleano que indica si se desea o no escribir un .csv con los resultados de planaridad de los grafos generados junto con su probabilidad por eje de ser planar.
 
    ```bash
    python randomGraphGenerator.py numIt numVertex maxEdges step fixedEdges writeGraphs writePr
@@ -40,7 +40,7 @@ pip install networkx[default]
    python randomGraphGenerator.py 5 20 54 5 True True True
    ```
 1. **Ejecución básica - PlanarGraphGenerator**:
-    n: Numero de ejes de vértices del grafo planar a generar
+    n: Numero de vértices del grafo planar a generar
    ```bash
       python planarGraphGenerator.py n
    ```
