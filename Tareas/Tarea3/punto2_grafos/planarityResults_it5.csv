@@ -1,0 +1,8 @@
+numEdges,it0,it1,it2,it3,it4,PrPlanar
+20,True,True,True,True,True,1.0
+25,False,True,True,True,False,0.6
+30,False,False,False,False,False,0.0
+35,False,False,False,False,False,0.0
+40,False,False,False,False,False,0.0
+45,False,False,False,False,False,0.0
+50,False,False,False,False,False,0.0

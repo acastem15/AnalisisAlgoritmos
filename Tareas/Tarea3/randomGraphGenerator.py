@@ -1,11 +1,12 @@
 import random
 from collections import deque
 import numpy as np
+import networkx as nx
 
 
-def graphGenerator(n, numMax,randEdges, archivo_salida):
+def graphGenerator(n, numEdgesMax,randEdges, archivo_salida,escribir):
 
-    maxEdgesPlanar = numMax
+    maxEdgesPlanar = numEdgesMax
     #print(maxEdgesPlanar)
 
     graph = {}
@@ -13,7 +14,9 @@ def graphGenerator(n, numMax,randEdges, archivo_salida):
         graph[v] = []
     
     realEdges = 0
-    f = open(archivo_salida,"w")
+    if escribir:
+        f = open(archivo_salida,"w")
+        f.write("source,target\n")
     for v in range(0, n):
         if randEdges ==True: 
             amountEdges = random.randint(1,maxEdgesPlanar//(n)) 
@@ -28,16 +31,19 @@ def graphGenerator(n, numMax,randEdges, archivo_salida):
                 graph[v].append(randVertex)
                 graph[randVertex].append(v)
                 edge = str(v)+","+str(randVertex)+"\n"
-                f.write(edge)
+                if escribir:
+                    f.write(edge)
                 realEdges+=1
             edgesV=len(graph[v])
 
-
+    print("actual edges",realEdges)
 
     #Connect disconnected         
     numDisconnected, colors  = findDisconnected(graph)
     #print(colors)
-    conectingEdges = connectComponents(numDisconnected,colors,graph)
+    conectingEdges = connectComponents(numDisconnected,colors)
+
+    
     #print(conectingEdges)
 
     for e in conectingEdges: 
@@ -46,12 +52,16 @@ def graphGenerator(n, numMax,randEdges, archivo_salida):
         edge = str(v1)+","+str(v2)+"\n"
         graph[v1].append(v2)
         graph[v2].append(v1)
-        f.write(edge)
+        if escribir:
+            f.write(edge)
         realEdges+=1
+    isConnected=True
+    if findDisconnected(graph)[0]>1 : isConnected=False
+    if isConnected==False: 
+        print("HEEEEEEELP!")
 
-    #print(realEdges)
-    #Code to build graph with exactly maxEdges
-    #print(realEdges)
+
+    
 
     if randEdges==False: 
     
@@ -62,14 +72,15 @@ def graphGenerator(n, numMax,randEdges, archivo_salida):
                     graph[randVertex2].append(randVertex)
                     graph[randVertex].append(randVertex2)
                     edge = str(randVertex)+","+str(randVertex2)+"\n"
-                    f.write(edge)
+                    if escribir:
+                        f.write(edge)
                     realEdges+=1
-        print(realEdges)
-
-
-
+        #print(realEdges)
     #print(realEdges)
-    f.close()
+    if escribir:
+        f.close()
+    return graph
+    
 
 def findDisconnected(graph):
     visited = deque()
@@ -90,19 +101,18 @@ def getIn(visited, colors,actualColor,  v, graph):
         if adjVer not in visited: 
             getIn(visited,colors,actualColor,adjVer,graph)
 
-def connectComponents(numDisconnected,colors,graph): 
+def connectComponents(numDisconnected,colors): 
+    print(colors)
     i = 0
     neededEdges = []
-    #print("Num components",numDisconnected)
+    print("Num components",numDisconnected)
     if numDisconnected>1:
-        while i <numDisconnected: 
-            colorsi = [k for k, v in colors.items() if v == i]#+1 because colors start in 1
+        while i <numDisconnected-1: 
+            colorsi = [k for k, v in colors.items() if v == i+1]#+1 because colors start in 1
             #print(colorsi)
-
-            if i == numDisconnected-1: 
-                colorsNext = [k for k, v in colors.items() if v == 0]
-            else: 
-                colorsNext = [k for k, v in colors.items() if v == i+1]
+            #Se conecta al primero 
+            colorsNext = [k for k, v in colors.items() if v == 0]
+       
 
             #print(colorsNext)
             #print("--------------")
@@ -110,18 +120,64 @@ def connectComponents(numDisconnected,colors,graph):
             randomColor1 = colorsi[random.randint(0, len(colorsi)-1)]
             randomColorNext = colorsNext[random.randint(0, len(colorsNext)-1)]
             neededEdges.append((randomColor1,randomColorNext))
-            i+=2
+            i+=1
+        print(neededEdges,len(neededEdges))
         return neededEdges
     else: 
         return []
 
 
 
+def validationPlanar(graph): 
+    nxGraph=nx.Graph()
+    for n,adj in graph.items(): 
+
+        for adjVertex in adj:
+            nxGraph.add_edge(n,adjVertex)
+
+    return nx.is_planar(nxGraph)
+    #print(nxGraph.number_of_nodes(), nxGraph.number_of_edges())
 
     
     
+def generateMultipleGraphs_withResultsPlanar(numIt,numVertex,maxEdges,step,archivo):
+
+    f = open(archivo,"w")
+
+    header = "numEdges,"
+
+    for i in range(0,numIt): 
+    
+        header+="it"+str(i)+","
+    header+="PrPlanar"+"\n"
+    f.write(header)
+        
+    for numEdges in range (numVertex,maxEdges+1,step):
+        countTrue = 0 
+        lineResults = str(numEdges)+","
+        for i in range ( 0,numIt): 
+
+            print("vertex: {0}, edges: {1}, iteration: {2}".format(numVertex,numEdges,i))
+
+        
+            archivoSalida = "./punto2_grafos/graph_vert"+str(numVertex)+"_edg"+str(numEdges)+"_"+str(i)+".csv"
+            graph = graphGenerator(numVertex,numEdges,False, archivoSalida,True)
+            isPlanar = validationPlanar(graph)
+            if isPlanar: 
+                countTrue+=1
+            
+            lineResults+=str(isPlanar)+","
+            print("..................planar: {0}".format(isPlanar))
 
 
-numEdges = 20
-archivoSalida = "./noComplete/graph_"+str(numEdges)+".csv"
-graphGenerator(numEdges,3*numEdges-6,False, archivoSalida)
+        pr = countTrue/numIt
+        lineResults+=str(round(pr,3))+"\n"
+
+        f.write(lineResults)
+    f.close()
+numIt=5
+numVertex=20
+maxEdges=3*numVertex-6
+step = 5
+archivo = "./punto2_grafos/planarityResults_it"+str(numIt)+".csv"
+generateMultipleGraphs_withResultsPlanar(numIt,numVertex,maxEdges,step,archivo)
