@@ -1,5 +1,5 @@
 import math
-
+import sys
 def generate_planar_graph(n):
     """
     Genera un grafo planar con n vértices mediante una generación modular de subciclos conectados.
@@ -90,24 +90,11 @@ def generate_planar_graph(n):
 
 # Generar grafos planares
 if __name__ == '__main__':
+    n = int(sys.argv[1])
+    graph = generate_planar_graph(n)
+   
     
-    graph25 = generate_planar_graph(25)
-    graph35 = generate_planar_graph(35)
-    graph50 = generate_planar_graph(50)
-    graph100 = generate_planar_graph(100)
-    
-    with open('./results/graph25.csv', 'w') as f:
-        for edge in graph25:
+    with open('./results/graph'+str(n)+'.csv', 'w') as f:
+        for edge in graph:
             f.write(f'{edge[0]},{edge[1]}\n')
-            
-    with open('./results/graph35.csv', 'w') as f:
-        for edge in graph35:
-            f.write(f'{edge[0]},{edge[1]}\n')
-    
-    with open('./results/graph50.csv', 'w') as f:
-        for edge in graph50:
-            f.write(f'{edge[0]},{edge[1]}\n')
-
-    with open('./results/graph100.csv', 'w') as f:
-        for edge in graph100:
-            f.write(f'{edge[0]},{edge[1]}\n')
+   

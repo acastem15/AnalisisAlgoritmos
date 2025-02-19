@@ -2,9 +2,10 @@ import random
 from collections import deque
 import numpy as np
 import networkx as nx
+import sys
 
 
-def graphGenerator(n, numEdgesMax,randEdges, archivo_salida,escribir):
+def graphGenerator(n, numEdgesMax,fixEdges, archivo_salida,escribir):
 
     maxEdgesPlanar = numEdgesMax
     #print(maxEdgesPlanar)
@@ -18,7 +19,7 @@ def graphGenerator(n, numEdgesMax,randEdges, archivo_salida,escribir):
         f = open(archivo_salida,"w")
         f.write("source,target\n")
     for v in range(0, n):
-        if randEdges ==True: 
+        if fixEdges ==False: 
             amountEdges = random.randint(1,maxEdgesPlanar//(n)) 
         else: 
             amountEdges = maxEdgesPlanar//(n)
@@ -56,15 +57,9 @@ def graphGenerator(n, numEdgesMax,randEdges, archivo_salida,escribir):
             f.write(edge)
         realEdges+=1
     isConnected=True
-    if findDisconnected(graph)[0]>1 : isConnected=False
-    if isConnected==False: 
-        #FIXME: jeje
-        print("HEEEEEEELP!")
+    if findDisconnected(graph)[0]>1 : isConnected=False    
 
-
-    
-
-    if randEdges==False: 
+    if fixEdges==True: 
     
         while realEdges<maxEdgesPlanar: 
             randVertex = random.randint(0,n-1)
@@ -141,17 +136,17 @@ def validationPlanar(graph):
 
     
     
-def generateMultipleGraphs_withResultsPlanar(numIt,numVertex,maxEdges,step,archivo):
+def generateMultipleGraphs_withResultsPlanar(numIt,numVertex,maxEdges,step,archivo,fixedEdges, writeGraphs,writePr):
+    if writePr: 
+        f = open(archivo,"w")
 
-    f = open(archivo,"w")
+        header = "numEdges,"
 
-    header = "numEdges,"
-
-    for i in range(0,numIt): 
-    
-        header+="it"+str(i)+","
-    header+="PrPlanar"+"\n"
-    f.write(header)
+        for i in range(0,numIt): 
+        
+            header+="it"+str(i)+","
+        header+="PrPlanar"+"\n"
+        f.write(header)
         
     for numEdges in range (numVertex-1,maxEdges+1,step):
         countTrue = 0 
@@ -161,8 +156,8 @@ def generateMultipleGraphs_withResultsPlanar(numIt,numVertex,maxEdges,step,archi
             print("vertex: {0}, edges: {1}, iteration: {2}".format(numVertex,numEdges,i))
 
         
-            archivoSalida = "./punto2_grafos/graph_vert"+str(numVertex)+"_edg"+str(numEdges)+"_"+str(i)+".csv"
-            graph = graphGenerator(numVertex,numEdges,False, archivoSalida,True)
+            archivoSalida = "./results/punto2_grafos/graph_vert"+str(numVertex)+"_edg"+str(numEdges)+"_"+str(i)+".csv"
+            graph = graphGenerator(numVertex,numEdges,fixedEdges, archivoSalida,writeGraphs)
             isPlanar = validationPlanar(graph)
             if isPlanar: 
                 countTrue+=1
@@ -173,12 +168,11 @@ def generateMultipleGraphs_withResultsPlanar(numIt,numVertex,maxEdges,step,archi
 
         pr = countTrue/numIt
         lineResults+=str(round(pr,3))+"\n"
+        if writePr:
+            f.write(lineResults)
+    if writePr:
+        f.close()
 
-        f.write(lineResults)
-    f.close()
-numIt=5
-numVertex=20
-maxEdges=3*numVertex-6
-step = 5
-archivo = "./punto2_grafos/planarityResults_it"+str(numIt)+".csv"
-generateMultipleGraphs_withResultsPlanar(numIt,numVertex,maxEdges,step,archivo)
+
+archivo = "./results/punto2_grafos/planarityResults_it"+str(sys.argv[1])+".csv"
+generateMultipleGraphs_withResultsPlanar(int(sys.argv[1]),int(sys.argv[2]),int(sys.argv[3]),int(sys.argv[4]),archivo,bool(sys.argv[5]),bool(sys.argv[6]), bool(sys.argv[7]))
