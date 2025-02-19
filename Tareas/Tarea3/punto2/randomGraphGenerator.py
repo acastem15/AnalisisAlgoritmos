@@ -173,6 +173,8 @@ def generateMultipleGraphs_withResultsPlanar(numIt,numVertex,maxEdges,step,archi
     if writePr:
         f.close()
 
+# Generar grafos aleatorios
+if __name__ == '__main__':
 
-archivo = "./results/punto2_grafos/planarityResults_it"+str(sys.argv[1])+".csv"
-generateMultipleGraphs_withResultsPlanar(int(sys.argv[1]),int(sys.argv[2]),int(sys.argv[3]),int(sys.argv[4]),archivo,bool(sys.argv[5]),bool(sys.argv[6]), bool(sys.argv[7]))
+    archivo = "./results/punto2_grafos/planarityResults_it"+str(sys.argv[1])+".csv"
+    generateMultipleGraphs_withResultsPlanar(int(sys.argv[1]),int(sys.argv[2]),int(sys.argv[3]),int(sys.argv[4]),archivo,bool(sys.argv[5]),bool(sys.argv[6]), bool(sys.argv[7]))
