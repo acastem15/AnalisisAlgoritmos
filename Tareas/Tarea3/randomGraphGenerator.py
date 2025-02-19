@@ -36,7 +36,7 @@ def graphGenerator(n, numEdgesMax,randEdges, archivo_salida,escribir):
                 realEdges+=1
             edgesV=len(graph[v])
 
-    print("actual edges",realEdges)
+    #print("actual edges",realEdges)
 
     #Connect disconnected         
     numDisconnected, colors  = findDisconnected(graph)
@@ -102,10 +102,10 @@ def getIn(visited, colors,actualColor,  v, graph):
             getIn(visited,colors,actualColor,adjVer,graph)
 
 def connectComponents(numDisconnected,colors): 
-    print(colors)
+    #print(colors)
     i = 0
     neededEdges = []
-    print("Num components",numDisconnected)
+    #print("Num components",numDisconnected)
     if numDisconnected>1:
         while i <numDisconnected-1: 
             colorsi = [k for k, v in colors.items() if v == i+1]#+1 because colors start in 1
@@ -121,7 +121,7 @@ def connectComponents(numDisconnected,colors):
             randomColorNext = colorsNext[random.randint(0, len(colorsNext)-1)]
             neededEdges.append((randomColor1,randomColorNext))
             i+=1
-        print(neededEdges,len(neededEdges))
+        #print(neededEdges,len(neededEdges))
         return neededEdges
     else: 
         return []
@@ -152,7 +152,7 @@ def generateMultipleGraphs_withResultsPlanar(numIt,numVertex,maxEdges,step,archi
     header+="PrPlanar"+"\n"
     f.write(header)
         
-    for numEdges in range (numVertex,maxEdges+1,step):
+    for numEdges in range (numVertex-1,maxEdges+1,step):
         countTrue = 0 
         lineResults = str(numEdges)+","
         for i in range ( 0,numIt): 
