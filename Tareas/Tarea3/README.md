@@ -24,8 +24,8 @@ pip install networkx[default]
 
 ## Uso del Programa
 1. **Ejecución básica - randomGraphGenerator**:
-    numIt (int):Número de grafos que se generar por cada número de eje ( cuando fixedEdges es True)
-    numVertex (int):Número de vertices en el grafo ( se genera de 0 a numVertex-1)
+    numIt (int):Número de grafos que se generar por cada número de eje (cuando fixedEdges es True)
+    numVertex (int):Número de vertices en el grafo (se genera de 0 a numVertex-1)
     maxEdges (int):Máximo número de ejes permitidos en el grafo
     step (int): Paso entre número de ejes
     fixedEdges(bool): Booleano que indica si se desea generar un grafo con número aleatorio de ejes entre 0,maxEdges, o con exactamente maxEdges (True).
@@ -46,10 +46,10 @@ pip install networkx[default]
    ```
 
 2. **Salida**:
-   - El programa genera archivos .csv con los grafos o con el calculo de las probabilidades según sea el caso. 
-     - python planarGraphGenerator.py numIt numVertex maxEdges step fixedEdges True writePr: Hace todos los archivos .csv de los grafos generados aleatoriamente
-     - python planarGraphGenerator.py numIt numVertex maxEdges step fixedEdges writeGraphs  True: Hace un archivo.csv con los resultados de is_planar() de la libreria networkx para rodas las iteraciones por número de ejes. 
-     - python planarGraphGenerator.py n: Genera archivo .csv con un grafo planar de n vertices. 
+   El programa genera archivos .csv con los grafos o con el calculo de las probabilidades según sea el caso. 
+     - ```python planarGraphGenerator.py numIt numVertex maxEdges step fixedEdges True writePr``` : Hace todos los archivos .csv de los grafos generados aleatoriamente
+     - ```python planarGraphGenerator.py numIt numVertex maxEdges step fixedEdges writeGraphs True```: Hace un archivo.csv con los resultados de is_planar() de la libreria networkx para rodas las iteraciones por número de ejes. 
+     - ```python planarGraphGenerator.py n```: Genera archivo .csv con un grafo planar de n vertices. 
 
 ## Notas Adicionales
 - **Compatibilidad**: El programa funciona en cualquier sistema operativo con Python >=3.10 instalado y networkx. 
