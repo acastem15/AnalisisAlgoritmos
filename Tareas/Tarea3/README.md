@@ -49,7 +49,6 @@ pip install networkx[default]
    - El programa genera archivos .csv con los grafos o con el calculo de las probabilidades según sea el caso. 
      - python planarGraphGenerator.py numIt numVertex maxEdges step fixedEdges True writePr: Hace todos los archivos .csv de los grafos generados aleatoriamente
      - python planarGraphGenerator.py numIt numVertex maxEdges step fixedEdges writeGraphs  True: Hace un archivo.csv con los resultados de is_planar() de la libreria networkx para rodas las iteraciones por número de ejes. 
-
      - python planarGraphGenerator.py n: Genera archivo .csv con un grafo planar de n vertices. 
 
 ## Notas Adicionales
