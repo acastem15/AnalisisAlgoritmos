@@ -58,6 +58,7 @@ def graphGenerator(n, numEdgesMax,randEdges, archivo_salida,escribir):
     isConnected=True
     if findDisconnected(graph)[0]>1 : isConnected=False
     if isConnected==False: 
+        #FIXME: jeje
         print("HEEEEEEELP!")
 
 
