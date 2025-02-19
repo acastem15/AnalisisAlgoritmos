@@ -12,7 +12,7 @@ def generate_planar_graph(n):
        utilizando la fórmula analítica:
            x = floor((sqrt(1+8*n) - 1)/2)
        Además se calcula:
-           rem = n - x*(x+1)/2
+           rem = n - x*(x+1)//2
 
     2. Definición de subgrafos (subciclos):
        - Si rem > 0 se generan (x+1) subgrafos; de lo contrario, se generan x subgrafos.
