@@ -40,7 +40,7 @@ pip install networkx[default]
    python randomGraphGenerator.py 5 20 54 5 True True True
    ```
 1. **Ejecución básica - PlanarGraphGenerator**:
-    n: Numero de ejes de vértices del grafo planar a generar
+    n: Numero de vértices del grafo planar a generar
    ```bash
       python planarGraphGenerator.py n
    ```
