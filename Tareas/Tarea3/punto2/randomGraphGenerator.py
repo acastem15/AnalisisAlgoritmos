@@ -153,7 +153,7 @@ def generateMultipleGraphs_withResultsPlanar(numIt,numVertex,maxEdges,step,archi
         lineResults = str(numEdges)+","
         for i in range ( 0,numIt): 
 
-            print("vertex: {0}, edges: {1}, iteration: {2}".format(numVertex,numEdges,i))
+            #print("vertex: {0}, edges: {1}, iteration: {2}".format(numVertex,numEdges,i))
 
         
             archivoSalida = "./results/punto2_grafos/graph_vert"+str(numVertex)+"_edg"+str(numEdges)+"_"+str(i)+".csv"
@@ -163,7 +163,7 @@ def generateMultipleGraphs_withResultsPlanar(numIt,numVertex,maxEdges,step,archi
                 countTrue+=1
             
             lineResults+=str(isPlanar)+","
-            print("..................planar: {0}".format(isPlanar))
+            #print("..................planar: {0}".format(isPlanar))
 
 
         pr = countTrue/numIt
