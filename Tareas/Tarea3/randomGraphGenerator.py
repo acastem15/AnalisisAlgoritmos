@@ -3,23 +3,22 @@ from collections import deque
 import numpy as np
 
 
-def graphGenerator(n, archivo_salida):
+def graphGenerator(n, numMax,randEdges, archivo_salida):
 
-    maxEdgesPlanar = 3*n-6 
-    edges = set()
-    existentes = set()  
+    maxEdgesPlanar = numMax
     #print(maxEdgesPlanar)
 
     graph = {}
     for v in range(0, n):
         graph[v] = []
     
-    #2024yr4
     realEdges = 0
     f = open(archivo_salida,"w")
     for v in range(0, n):
-
-        amountEdges = random.randint(1,maxEdgesPlanar//(n)) 
+        if randEdges ==True: 
+            amountEdges = random.randint(1,maxEdgesPlanar//(n)) 
+        else: 
+            amountEdges = maxEdgesPlanar//(n)
            
         edgesV = len(graph[v])
         #print(edgesV,amountEdges)
@@ -32,6 +31,9 @@ def graphGenerator(n, archivo_salida):
                 f.write(edge)
                 realEdges+=1
             edgesV=len(graph[v])
+
+
+
     #Connect disconnected         
     numDisconnected, colors  = findDisconnected(graph)
     #print(colors)
@@ -45,24 +47,24 @@ def graphGenerator(n, archivo_salida):
         graph[v1].append(v2)
         graph[v2].append(v1)
         f.write(edge)
-
-
+        realEdges+=1
 
     #print(realEdges)
-    #Code to build graph with exactly 3*V-6
+    #Code to build graph with exactly maxEdges
     #print(realEdges)
-    """
-    while realEdges<maxEdgesPlanar: 
-        randVertex = random.randint(0,n-1)
-        randVertex2 = random.randint(0,n-1)
-        if randVertex2 != randVertex and (randVertex not in graph[randVertex2])and (randVertex2 not in graph[randVertex]): 
-                graph[randVertex2].append(randVertex)
-                graph[randVertex].append(randVertex2)
-                edge = str(randVertex)+","+str(randVertex2)+"\n"
-                f.write(edge)
-                realEdges+=1
-    print(realEdges)
-    """
+
+    if randEdges==False: 
+    
+        while realEdges<maxEdgesPlanar: 
+            randVertex = random.randint(0,n-1)
+            randVertex2 = random.randint(0,n-1)
+            if randVertex2 != randVertex and (randVertex not in graph[randVertex2])and (randVertex2 not in graph[randVertex]): 
+                    graph[randVertex2].append(randVertex)
+                    graph[randVertex].append(randVertex2)
+                    edge = str(randVertex)+","+str(randVertex2)+"\n"
+                    f.write(edge)
+                    realEdges+=1
+        print(realEdges)
 
 
 
@@ -122,4 +124,4 @@ def connectComponents(numDisconnected,colors,graph):
 
 numEdges = 20
 archivoSalida = "./noComplete/graph_"+str(numEdges)+".csv"
-graphGenerator(numEdges, archivoSalida)
+graphGenerator(numEdges,3*numEdges-6,False, archivoSalida)
