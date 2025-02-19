@@ -148,7 +148,7 @@ def generateMultipleGraphs_withResultsPlanar(numIt,numVertex,maxEdges,step,archi
         header+="PrPlanar"+"\n"
         f.write(header)
         
-    for numEdges in range (numVertex-1,maxEdges+1,step):
+    for numEdges in range (numVertex,maxEdges+1,step):
         countTrue = 0 
         lineResults = str(numEdges)+","
         for i in range ( 0,numIt): 
