@@ -11,7 +11,7 @@ def generate_planar_graph(n):
            x*(x+1)/2 <= n
        utilizando la fórmula analítica:
            x = floor((sqrt(1+8*n) - 1)/2)
-       Además se calcula:
+       Además se calcula el remanente:
            rem = n - x*(x+1)//2
 
     2. Definición de subgrafos (subciclos):
