@@ -1,4 +1,7 @@
 import random
+from collections import deque
+import numpy as np
+
 
 def graphGenerator(n, archivo_salida):
 
@@ -29,6 +32,21 @@ def graphGenerator(n, archivo_salida):
                 f.write(edge)
                 realEdges+=1
             edgesV=len(graph[v])
+    #Connect disconnected         
+    numDisconnected, colors  = findDisconnected(graph)
+    #print(colors)
+    conectingEdges = connectComponents(numDisconnected,colors,graph)
+    #print(conectingEdges)
+
+    for e in conectingEdges: 
+        v1 = e[0]
+        v2 = e[1]
+        edge = str(v1)+","+str(v2)+"\n"
+        graph[v1].append(v2)
+        graph[v2].append(v1)
+        f.write(edge)
+
+
 
     #print(realEdges)
     #Code to build graph with exactly 3*V-6
@@ -50,7 +68,57 @@ def graphGenerator(n, archivo_salida):
 
     #print(realEdges)
     f.close()
+
+def findDisconnected(graph):
+    visited = deque()
+    colors= {}
+    actualColor =0; 
+    for v in graph.keys(): 
+        if v not in visited: #New component
+            getIn(visited, colors,actualColor, v, graph)
+            actualColor+=1; 
+    return actualColor, colors
+
+
+def getIn(visited, colors,actualColor,  v, graph): 
+    visited.append(v)
+    colors[v] = actualColor
+
+    for adjVer in graph[v]: 
+        if adjVer not in visited: 
+            getIn(visited,colors,actualColor,adjVer,graph)
+
+def connectComponents(numDisconnected,colors,graph): 
+    i = 0
+    neededEdges = []
+    #print("Num components",numDisconnected)
+    if numDisconnected>1:
+        while i <numDisconnected: 
+            colorsi = [k for k, v in colors.items() if v == i]#+1 because colors start in 1
+            #print(colorsi)
+
+            if i == numDisconnected-1: 
+                colorsNext = [k for k, v in colors.items() if v == 0]
+            else: 
+                colorsNext = [k for k, v in colors.items() if v == i+1]
+
+            #print(colorsNext)
+            #print("--------------")
+            #Select ranodm from different components
+            randomColor1 = colorsi[random.randint(0, len(colorsi)-1)]
+            randomColorNext = colorsNext[random.randint(0, len(colorsNext)-1)]
+            neededEdges.append((randomColor1,randomColorNext))
+            i+=2
+        return neededEdges
+    else: 
+        return []
+
+
+
+
     
+    
+
 
 numEdges = 20
 archivoSalida = "./noComplete/graph_"+str(numEdges)+".csv"
