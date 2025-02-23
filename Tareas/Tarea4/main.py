@@ -3,7 +3,7 @@ import argparse
 from shannon_fano import shannon_fano_coding
 #TODO: huffman algorithm
 #from huffman import huffman_coding
-from utils import decode_str, write_bits_to_file, get_file_size
+from utils import decode_str, write_bits_to_file, get_file_size, read_bits_from_file
 
 def main():
     parser = argparse.ArgumentParser(description="Archivo a comprimir usando Shannon-Fano o Huffman")
@@ -38,6 +38,14 @@ def main():
     compressed_size = get_file_size(byte_coded_file)
     print(f"\nTamaño del archivo original: {original_size} bits")
     print(f"Tamaño del archivo comprimido: {compressed_size} bits")
+    
+    bin_file = read_bits_from_file(byte_coded_file)
+    
+    if file == decode_str(bin_file, b_sf):
+        print("\nLa compresión es correcta! Al leer y decodificar el archivo binario se obtiene el contenido original.")
+    else:
+        print("\nError en la compresión! Al leer y decodificar el archivo binario no se obtiene el contenido original.")
+    
 
 if __name__ == "__main__":
     main()
