@@ -66,6 +66,7 @@ def write_bits_to_file(bitstring, filename):
     with open(filename, 'wb') as f:
         f.write(output_bytes)
 
+
 def read_bits_from_file(filename):
     """ Lee el archivo binario 'filename' y recupera la cadena de bits original,
     quitando el padding indicado en el primer byte.
