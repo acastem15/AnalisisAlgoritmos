@@ -1,5 +1,6 @@
 import math
-
+from utils import compute_stats
+    
 def shannon_fano_coding(file_content:str)->tuple[str, dict]:
     """Shannon-Fano coding algorithm
 
@@ -21,21 +22,12 @@ def shannon_fano_coding(file_content:str)->tuple[str, dict]:
         char_prob[char] = file_content.count(char)/len(file_content) # probabilidad
         char_code_length[char] = math.ceil(-math.log2(char_prob[char])) # longitud
         
-    # Valor esperado de bits por símbolo
-    average_bits = sum(char_prob[char]*char_code_length[char] for char in set_of_chars)
-    print(f"Valor esperado de bits por símbolo: {average_bits}")
-    # Entropía en el peor caso
-    entropy_worst_case = math.log2(len(set_of_chars))
-    print(f"Entropía en el peor caso: {entropy_worst_case}")
-    # Entropía de Shannon
-    entropy =-sum(char_prob[char]*math.log2(char_prob[char]) for char in set_of_chars)
-    print(f"Entropía de Shannon: {entropy}")
-    # Total de bits necesarios para codificar el archivo
-    total_bits  = sum(char_code_length[char] for char in file_content)
-    print(f"Total de bits necesarios: {total_bits}")
-    # Almacenamiento real esperado, considerando el byte para almacenar la cantidad de padding y el padding mismo
-    expected_storage = total_bits+8+total_bits%8
-    print(f"Almacenamiento real esperado en bits: {expected_storage}")
+    compute_stats(
+        char_prob=char_prob, 
+        char_code_length=char_code_length, 
+        file_content=file_content, 
+        set_of_chars=set_of_chars
+    )
     
     # Algoritmo de codificación Shannon-Fano:
     l_sf = sorted(char_code_length.items(), key=lambda x: x[1])

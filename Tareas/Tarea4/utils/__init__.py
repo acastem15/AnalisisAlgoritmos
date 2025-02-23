@@ -1,5 +1,6 @@
 
 import os
+import math
 
 
 def get_file_size(file_path:str)->int:
@@ -93,3 +94,36 @@ def read_bits_from_file(filename):
         bitstring = bitstring[:-extra_padding]
     
     return bitstring
+
+
+def compute_stats(char_prob:dict, char_code_length:dict, 
+                file_content:str, set_of_chars:set):
+    """ Calcula e imprime los siguientes estadísticos:
+    - Valor esperado de bits por símbolo, de acuerdo a ∑p(x)l(x)
+    - Entropía en el peor caso, de acuerdo a log2(n)
+    - Entropía de Shannon, de acuerdo a ∑p(x)log2(p(x))
+    - Total de bits necesarios para codificar el archivo
+    - Almacenamiento real esperado, considerando el byte para almacenar la cantidad de padding y el padding
+    
+    Args:
+        char_prob (dict): _description_
+        char_code_length (dict): _description_
+        file_content (str): _description_
+        set_of_chars (set): _description_
+    """    
+    # Valor esperado de bits por símbolo
+    average_bits = sum(char_prob[char]*char_code_length[char] for char in set_of_chars)
+    print(f"Valor esperado de bits por símbolo: {average_bits}")
+    # Entropía en el peor caso
+    entropy_worst_case = math.log2(len(set_of_chars))
+    print(f"Entropía en el peor caso: {entropy_worst_case}")
+    # Entropía de Shannon
+    entropy =-sum(char_prob[char]*math.log2(char_prob[char]) for char in set_of_chars)
+    print(f"Entropía de Shannon: {entropy}")
+    # Total de bits necesarios para codificar el archivo
+    total_bits  = sum(char_code_length[char] for char in file_content)
+    print(f"Total de bits necesarios: {total_bits}")
+    # Almacenamiento real esperado, considerando el byte para almacenar la cantidad de padding y el padding mismo
+    expected_storage = total_bits+8+total_bits%8
+    print(f"Almacenamiento real esperado en bits: {expected_storage}")
+    
