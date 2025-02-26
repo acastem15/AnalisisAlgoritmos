@@ -23,5 +23,5 @@ Este programa implementa la codificación de Shannon Fano, Huffman; así como la
 ## Uso del Programa
 1. **Ejecución básica - main.py**:
     ```bash
-    python main.py numIt numVertex maxEdges step fixedEdges writeGraphs writePr
+        python main.py -f ./test_files/song_1.txt -a hf 
     ```
