@@ -1,6 +1,43 @@
 
 import os
 import math
+def save_cod(b_sf, file): 
+    f = open(file, "w")
+
+    for symbol in b_sf: 
+        if symbol =='\n':
+            f.write('\\n')
+        elif symbol ==' ':
+            f.write('sp')
+        else: 
+            f.write(str(symbol))
+
+        f.write(" ")
+        f.write(b_sf[symbol])
+        f.write("\n")
+    f.close()
+
+def get_b_map(file_b_map): 
+    f = open(file_b_map,"r")
+    table = {}
+    for line in f:
+        tr = line.split(" ")
+        if len(tr)>1: 
+            
+            char = tr[0]
+            if char =='\\n':
+                char = '\n'
+            elif char =='sp':
+                char = ' '
+            code = tr[1]
+            table[char]=code.strip("\n")
+
+    return table
+
+
+
+
+
 
 
 def get_file_size(file_path:str)->int:
@@ -15,7 +52,7 @@ def get_file_size(file_path:str)->int:
     return os.path.getsize(file_path)*8
 
 
-def decode_str(coded_str:str, b_map:dict)->str:
+def decode_str(coded_str:str, file_b_map:str)->str:
     """Decodifica la cadena codificada 'coded_str' usando el diccionario de códigos 'b_map'.
 
     Args:
@@ -25,6 +62,8 @@ def decode_str(coded_str:str, b_map:dict)->str:
     Returns:
         str: _description_
     """    
+
+    b_map = get_b_map(file_b_map)
     
     # Crear el diccionario inverso: código -> símbolo
     inv_b_sf = {code: symbol for symbol, code in b_map.items()}

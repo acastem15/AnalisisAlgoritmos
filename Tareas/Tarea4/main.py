@@ -3,7 +3,7 @@ import argparse
 from shannon_fano import shannon_fano_coding
 #TODO: huffman algorithm
 from huffman import huffman_coding
-from utils import decode_str, write_bits_to_file, get_file_size, read_bits_from_file
+from utils import decode_str, write_bits_to_file, get_file_size, read_bits_from_file, save_cod,get_b_map
 
 def main():
     parser = argparse.ArgumentParser(description="Archivo a comprimir usando Shannon-Fano o Huffman")
@@ -22,10 +22,21 @@ def main():
         coded_file, b_sf = shannon_fano_coding(file)
     elif algorithm == 'hf':
         coded_file, b_sf = huffman_coding(file)
-        #print("Algoritmo de Huffman aún no implementado.")
        # sys.exit()
     
-    decoded_text = decode_str(coded_file, b_sf)
+
+    #Save codification 
+    f_cod = f'./results/{file_path.split("/")[-1].split(".")[0]}.{algorithm+"_cod"}'
+    print(f_cod)
+
+    copy_bsf = b_sf.copy()
+    save_cod(copy_bsf, f_cod)
+    print("\n------")
+    print(b_sf)
+    print("------")
+
+
+    decoded_text = decode_str(coded_file, f_cod)
     if decoded_text == file:
         print("\nLa codificación es correcta! Al decodificar el texto se obtiene el contenido original.")
     else:
@@ -41,7 +52,7 @@ def main():
     
     bin_file = read_bits_from_file(byte_coded_file)
     
-    if file == decode_str(bin_file, b_sf):
+    if file == decode_str(bin_file, f_cod):
         print("\nLa compresión es correcta! Al leer y decodificar el archivo binario se obtiene el contenido original.")
     else:
         print("\nError en la compresión! Al leer y decodificar el archivo binario no se obtiene el contenido original.")

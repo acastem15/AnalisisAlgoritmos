@@ -14,13 +14,14 @@ def shannon_fano_coding(file_content:str)->tuple[str, dict]:
         
     set_of_chars = set(file_content)
 
-    # Calcular la probabilidad de cada símbolo y la longitud de su código
-    # según el techo de -log2(p)
+    # Calcular la probabilidad de cada símbolo a partir de las ocurrencias de las letras / longitud del texto
+    # y la longitud de su código
+    # según el techo de log2(p) siendo p 
     char_prob = {}
     char_code_length = {}
     for char in set_of_chars:
         char_prob[char] = file_content.count(char)/len(file_content) # probabilidad
-        char_code_length[char] = math.ceil(-math.log2(char_prob[char])) # longitud
+        char_code_length[char] = math.ceil(-math.log2(char_prob[char])) # longitud de la codificacion por cada caracter (según probabilidades)
         
     compute_stats(
         char_prob=char_prob, 
@@ -33,7 +34,7 @@ def shannon_fano_coding(file_content:str)->tuple[str, dict]:
     l_sf = sorted(char_code_length.items(), key=lambda x: x[1])
     b_sf = {l_sf[0][0]: bin(0)[2:].zfill(l_sf[0][1])}
 
-    # BSF[i]=(BSF[i-1]+1)*2d[i] where d[i] = LSF[i]-LSF[i-1]
+    # B_SF[i]=(B_SF[i-1]+1)*2d[i] where d[i] = L_SF[i]-L_SF[i-1]
     for i in range(1, len(l_sf)):
         d_i = l_sf[i][1]-l_sf[i-1][1]
         b_sf[l_sf[i][0]] = bin((int(b_sf[l_sf[i-1][0]], 2)+1)*2**(d_i))[2:].zfill(l_sf[i][1])

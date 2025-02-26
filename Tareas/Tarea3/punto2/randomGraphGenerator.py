@@ -157,7 +157,7 @@ def generateMultipleGraphs_withResultsPlanar(numIt,numVertex,maxEdges,step,archi
 
         
             archivoSalida = "./results/punto2_grafos/graph_vert"+str(numVertex)+"_edg"+str(numEdges)+"_"+str(i)+".csv"
-            graph = graphGenerator(numVertex,numEdges,fixedEdges, archivoSalida,writeGraphs)
+            graph = graphGenerator(numVertex,numEdges,fixedEdges, archivoSalida,False)
             isPlanar = validationPlanar(graph)
             if isPlanar: 
                 countTrue+=1

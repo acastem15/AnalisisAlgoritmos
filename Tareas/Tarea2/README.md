@@ -40,7 +40,8 @@ Este programa implementa los algoritmos de Edmonds-Karp y Push-Relabel para calc
    - El programa imprime en la consola:
      - El flujo en cada eje y el flujo máximo para ambos algoritmos.
      - El tiempo de ejecución de cada algoritmo.
-   - Para guardar la salida en un archivo, redirija la salida estándar:
+     - Tres archivos con los ejes (origen destino flujo), que indica el flujo que se envia por cada eje, para cada algoritmo
+   - Para guardar la salida en un archivo (flujo y tiempo máximo de ejecución), redirija la salida estándar:
      ```bash
      python main.py entrada.txt > salida.txt
      ```
