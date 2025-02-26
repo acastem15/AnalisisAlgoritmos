@@ -14,8 +14,9 @@ Este programa implementa la codificación de Shannon Fano, Huffman; así como la
 │   └── __init.py__/     # Contiene codificación Hufman implementado con un heapq
 ├── shannon_fano/           # Implementación de random graphs
 │   └── __init.py__/    #Contiene codificación shannon Fano
-├── utils/           # Stats
+├── utils/           # Herramientas
 │   └── __init.py__/    #Contiene funciones para codificar, decodificar y calcular stats
+├── results/           # Aqui se guardan los resultados tanto el archivo comprimido como la codificación, sp es espacio y \n se guarda como \\n
 
 ```
 

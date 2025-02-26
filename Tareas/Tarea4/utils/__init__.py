@@ -35,11 +35,6 @@ def get_b_map(file_b_map):
     return table
 
 
-
-
-
-
-
 def get_file_size(file_path:str)->int:
     """Obtiene el tamaño en bits del archivo en 'file_path'.
 
@@ -77,8 +72,7 @@ def decode_str(coded_str:str, file_b_map:str)->str:
             decoded += inv_b_sf[current_code]
             current_code = ""
     return decoded
-    
-    
+
 def write_bits_to_file(bitstring, filename):
     """ Escribe la cadena de bits 'bitstring' en el archivo 'filename' como bytes reales.
     Se agrega padding para completar el último byte y se almacena la cantidad de bits de padding
