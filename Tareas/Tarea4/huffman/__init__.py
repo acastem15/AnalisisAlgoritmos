@@ -42,6 +42,11 @@ def huffmanAlgorithm(char_prob):
     priority_queue = [(char_prob, char) for char, char_prob in char_prob.items()]
     heapq.heapify(priority_queue)
 
+    if len(priority_queue) == 1:
+        _, char = priority_queue[0]
+        BH[char] = "0"
+        return BH
+
     while len(priority_queue) > 1:
         prob1, char1 = heapq.heappop(priority_queue)
         prob2, char2 = heapq.heappop(priority_queue)
