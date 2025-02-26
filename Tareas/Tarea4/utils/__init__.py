@@ -64,6 +64,8 @@ def write_bits_to_file(bitstring, filename):
     
     # Escribir en modo binario. El archivo resultante siempre tendrá al menos 1 byte extra 
     # para almacenar el padding.
+    os.makedirs(os.path.dirname(filename), exist_ok=True)
+
     with open(filename, 'wb') as f:
         f.write(output_bytes)
 

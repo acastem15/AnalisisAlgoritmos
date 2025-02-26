@@ -2,13 +2,13 @@ import sys
 import argparse
 from shannon_fano import shannon_fano_coding
 #TODO: huffman algorithm
-#from huffman import huffman_coding
+from huffman import huffman_coding
 from utils import decode_str, write_bits_to_file, get_file_size, read_bits_from_file
 
 def main():
     parser = argparse.ArgumentParser(description="Archivo a comprimir usando Shannon-Fano o Huffman")
     parser.add_argument('-f', '--file', required=True, help='PRuta del archivo a comprimir')
-    parser.add_argument('-a', '--algorithm', required=True, choices=['sf', 'huffman'], help='Algoritmo de compresión a utilizar: Shannon-Fano (sf) o Huffman (hf)')
+    parser.add_argument('-a', '--algorithm', required=True, choices=['sf', 'hf'], help='Algoritmo de compresión a utilizar: Shannon-Fano (sf) o Huffman (hf)')
     
     args = parser.parse_args()
     
@@ -21,9 +21,9 @@ def main():
     if algorithm == 'sf':
         coded_file, b_sf = shannon_fano_coding(file)
     elif algorithm == 'hf':
-        # coded_file, b_huffman = huffman_coding(file)
-        print("Algoritmo de Huffman aún no implementado.")
-        sys.exit()
+        coded_file, b_sf = huffman_coding(file)
+        #print("Algoritmo de Huffman aún no implementado.")
+       # sys.exit()
     
     decoded_text = decode_str(coded_file, b_sf)
     if decoded_text == file:
