@@ -12,6 +12,7 @@ def main():
     parser.add_argument('-v', '--version', required=True, choices=['v1', 'v2'], help='Version del arreglo de sufijos. v1 sin optimización de espacio, v2 con optimización')
     parser.add_argument('-c', '--consultas', required=True,help='Archivo con consultas ( una por linea)')
     parser.add_argument('-r', '--result', required=True, help='Ruta del archivo de salida')
+    parser.add_argument('-e', '--experiment', action='store_true', help='Ejecutar experimentos de rendimiento')
     
     args = parser.parse_args()
     
@@ -79,7 +80,8 @@ def main():
     print()
     
     
-    run_experiments()
+    if args.experiment:
+        run_experiments(version)
     
 
 
