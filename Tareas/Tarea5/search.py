@@ -22,11 +22,11 @@ def search_v1 (text,sufList,query,results):
             results.append(f"{halfSuffixPos}-{halfSuffixPos+len(query)-1}")
             #Extend right and left
             if index>0: 
-                print("leeeeeft", half,len(sufList))
+                #print("leeeeeft", half,len(sufList))
                 #Extend left
                 results = extend_v1(results,sufList,query,index-1,"left")
             if index<len(sufList)-1:
-                print("righttttt", half,len(sufList))
+                #print("righttttt", half,len(sufList))
                 results = extend_v1(results,sufList,query,index-1,"right")
 
 

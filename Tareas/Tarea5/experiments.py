@@ -11,7 +11,7 @@ def run_experiments(version='v2'):
     Imprime una tabla con los tiempos de ejecución.
     """
     # Definir tamaños de texto y cantidad de consultas
-    text_sizes = [100_000, ]  # Se pueden agregar otros tamaños: 1_000_000, 10_000_000, etc.
+    text_sizes = [100_000,1_000_000,10_000_000 ]  # Se pueden agregar otros tamaños: 1_000_000, 10_000_000, etc.
     query_counts = [1_000, ]   # Se pueden agregar otros conteos: 10_000, 100_000, 1_000_000, etc.
     
     print("\nEjecutando experimentos de rendimiento:")
