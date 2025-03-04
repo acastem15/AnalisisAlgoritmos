@@ -1,7 +1,6 @@
 
 
-def search (text,sufList,query,result): 
-
+def search (text,sufList,query,results): 
 
     #Stop recursion
     numSuf = len(sufList)
@@ -9,33 +8,28 @@ def search (text,sufList,query,result):
 
     halfSuffixText = sufList[half].text
     halfSuffixPos = sufList[half].position
-    if numSuf>1: 
 
+    subStrSuf = halfSuffixText[0:len(query)]
+
+    print(0,half,numSuf)
+
+    print("check",halfSuffixText,"pos ",halfSuffixPos,subStrSuf,query)
+    if query==subStrSuf: 
+            results.append(f"{halfSuffixPos}-{halfSuffixPos+len(query)-1}")
+
+    if numSuf>1 and query!=subStrSuf: 
         halfLeft = sufList[0:half]
         halfRight = sufList[half:]
-        i=0
-        qInSuffix = halfSuffixText.find(query)
-        if qInSuffix: 
-            result.append(halfSuffixPos+qInSuffix)
-        else 
+    
+        if query <subStrSuf: 
+            search(text,halfLeft,query,results)
+        
 
+        elif query>subStrSuf:
+            search(text,halfRight,query,results)
+    elif numSuf==1 and query!=subStrSuf:
+        print("End recursion")
 
-            if query <halfSuffix:
-                search(text,halfLeft,query)
-                break
-            elif c >halfSuffix[i]: 
-                search(text,halfRight,query)
-                break
-            elif c in halfSuffix:  
-    else:
-        for c in query: 
-            if c <halfSuffix[i]:
-                search(text,halfLeft,query)
-                break
-            elif c >halfSuffix[i]: 
-                search(text,halfRight,query)
-                break
-            elif c==halfSuffix[i]: 
-                i+=1  
-
+    return results
+        
 

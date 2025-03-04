@@ -9,7 +9,6 @@ def suffixList_v1(text):
         suf = text[size:]
 
         suffixObj = Suffix(suf,size)
-        print (suffixObj)
 
         arrayList.append(suffixObj)
         size-=1

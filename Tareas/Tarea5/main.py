@@ -2,6 +2,8 @@ import sys
 import argparse
 import suffixArray as sa
 
+from search import search
+
 def main():
     parser = argparse.ArgumentParser(description="Suffix array")
     parser.add_argument('-f', '--file', required=True, help='Ruta del texto')
@@ -19,15 +21,18 @@ def main():
     text = ""
     for l in f:
         text +=l.replace('\n',"")
-    print("JEJEJEJEJ",text)
+    print(text)
     f.close()
 
     sufList = sa.suffixList_v1(text)
     
     posList = sa.sufPosition(sufList)
     textList = sa.sufText(sufList)
-    for e in textList:
-        print(e)
+    print(textList)
+
+    print(search(text,sufList,"el",[]))
+    
+
 
 
 
