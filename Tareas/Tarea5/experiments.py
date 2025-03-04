@@ -1,10 +1,8 @@
 import random
 import time
 import string
-from suffixArray import suffixList_v1
+from suffixArray import suffixList_v1, sufPosition
 from search import search_v2, search_v1
-
-
 
 def run_experiments(version='v2'):
     """
@@ -12,8 +10,8 @@ def run_experiments(version='v2'):
     Imprime una tabla con los tiempos de ejecución.
     """
     # Definir tamaños de texto y cantidad de consultas
-    text_sizes = [100_000, 1_000_000, 10_000_000]
-    query_counts = [1_000, 10_000, 100_000, 1_000_000]
+    text_sizes = [100_000, ]  # Se pueden agregar otros tamaños: 1_000_000, 10_000_000, etc.
+    query_counts = [1_000, ]   # Se pueden agregar otros conteos: 10_000, 100_000, 1_000_000, etc.
     
     print("\nEjecutando experimentos de rendimiento:")
     print("=" * 80)
@@ -25,9 +23,14 @@ def run_experiments(version='v2'):
         print(f"Generando texto aleatorio de {text_size} caracteres...")
         text = ''.join(random.choices(string.ascii_lowercase + ' ', k=text_size))
         
-        # Construir el arreglo de sufijos una vez por cada tamaño de texto
+        # Construir el arreglo de sufijos o la lista de posiciones según la versión
         t0 = time.perf_counter()
-        suffix_array = suffixList_v1(text)
+        base_array = suffixList_v1(text)
+        if version == 'v2':
+            suffix_array = sufPosition(base_array)
+            del base_array
+        else:
+            suffix_array = base_array
         t1 = time.perf_counter()
         sa_time = t1 - t0
         
@@ -45,7 +48,13 @@ def run_experiments(version='v2'):
             t0_query = time.perf_counter()
             for query in queries:
                 if version == 'v2':
-                    _ = search_v2(text, suffix_array, query, [])
+                    try:
+                        _ = search_v2(text, suffix_array, query, [])
+                    except:
+                        with open("error.txt", "w") as f:
+                            f.write("text: ",text)
+                            f.write("query: ",query)
+                        break
                 else:
                     _ = search_v1(text, suffix_array, query, [])
             t1_query = time.perf_counter()
