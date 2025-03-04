@@ -3,6 +3,7 @@ import time
 import string
 from suffixArray import suffixList_v1, sufPosition
 from search import search_v2, search_v1
+from traceback import print_exc
 
 def run_experiments(version='v2'):
     """
@@ -46,17 +47,22 @@ def run_experiments(version='v2'):
             
             # Medir tiempo de procesamiento de consultas
             t0_query = time.perf_counter()
+            c = 0
             for query in queries:
-                if version == 'v2':
-                    try:
+                try:
+                    if version == 'v2':
                         _ = search_v2(text, suffix_array, query, [])
-                    except:
-                        with open("error.txt", "w") as f:
-                            f.write("text: ",text)
-                            f.write("query: ",query)
-                        break
-                else:
-                    _ = search_v1(text, suffix_array, query, [])
+                    else:
+                        _ = search_v1(text, suffix_array, query, [])
+                except:
+                    print_exc()
+                    with open(f"./results/error_{version}.txt", "w") as f:
+                        f.write("text: "+text)
+                        f.write("\nquery: "+query)
+                        print(f"Error en consulta {c}: {query}")
+                    break
+                finally:
+                    c += 1
             t1_query = time.perf_counter()
             query_time = t1_query - t0_query
             
