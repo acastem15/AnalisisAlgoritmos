@@ -105,7 +105,7 @@ def extend_v2(text,results,posList,query,index,sign):
     initial_pos, size = list(posList.items())[index]
     end_pos = initial_pos + size -1
     halfNextSuffixText = text[initial_pos:end_pos]
-    halfNextSuffixPos = index
+    halfNextSuffixPos = initial_pos
     substrSuf = halfNextSuffixText[0:len(query)]
 
     while query==substrSuf: 
@@ -118,7 +118,7 @@ def extend_v2(text,results,posList,query,index,sign):
         initial_pos, size = list(posList.items())[index]
         end_pos = initial_pos + size -1
         halfNextSuffixText = text[initial_pos:end_pos]
-        halfNextSuffixPos = index
+        halfNextSuffixPos = initial_pos
         substrSuf = halfNextSuffixText[0:len(query)]
 
     return results
