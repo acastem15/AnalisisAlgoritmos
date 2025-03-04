@@ -7,3 +7,4 @@ class Suffix:
     
     def __str__(self):
         return f"({self.position}){self.text}"
+

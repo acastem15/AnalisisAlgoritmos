@@ -30,3 +30,19 @@ def sufText (sufList):
         textList.append(suf.text)
     return textList
 
+def suffixList_v2(text):
+
+    arrayList = []
+    size = len(text)-1
+
+    while size>=0: 
+        suf = text[size:]
+
+        suffixObj = SuffixBetter(suf,size)
+
+        arrayList.append(suffixObj)
+        size-=1
+    arrayList.sort()
+
+    return arrayList
+

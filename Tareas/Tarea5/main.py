@@ -28,6 +28,7 @@ def main():
         text +=l.replace('\n',"")
     print(text)
     f.close()
+    
 
     if version=="v1":
 
