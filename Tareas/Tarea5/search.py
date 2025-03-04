@@ -6,6 +6,9 @@ def search_v1 (text,sufList,query,results):
     numSuf = len(sufList)
     half =numSuf//2
 
+
+    #print(half,)
+
     halfSuffixText = sufList[half].text
     halfSuffixPos = sufList[half].position
 
@@ -19,10 +22,12 @@ def search_v1 (text,sufList,query,results):
             results.append(f"{halfSuffixPos}-{halfSuffixPos+len(query)-1}")
             #Extend right and left
             if index>0: 
+                print("leeeeeft", half,len(sufList))
                 #Extend left
                 results = extend_v1(results,sufList,query,index-1,"left")
             if index<len(sufList)-1:
-                results = extend_v1(results,sufList,query,index+1,"right")
+                print("righttttt", half,len(sufList))
+                results = extend_v1(results,sufList,query,index-1,"right")
 
 
     if numSuf>1 and query!=subStrSuf: 
