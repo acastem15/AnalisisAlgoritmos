@@ -15,9 +15,7 @@ Este repositorio implementa un sistema de búsqueda sobre un texto utilizando ar
 ├── experiments.py        # Script para ejecutar experimentos de rendimiento
 ├── main.py               # Script principal con el CLI (subcomandos: search, experiments)
 ├── README.md             # Este archivo de documentación
-├── results
-│   ├── error_v1.txt      # Archivo de salida de errores para la versión v1
-│   └── error_v2.txt      # Archivo de salida de errores para la versión v2
+├── results               # Directorio para guardar la salida de los programas
 ├── search.py             # Funciones de búsqueda (search_v1, search_v2) y sus auxiliares
 ├── suffixArray.py        # Funciones para construir el arreglo de sufijos y obtener posiciones
 └── suffix.py             # Clase Suffix, que encapsula cada sufijo (texto y posición)
@@ -76,9 +74,3 @@ python main.py experiments -v v1
 **Parámetros:**
 
 - `-v` o `--version`: Versión del algoritmo a probar (`v1` o `v2`).
-
-## Notas Adicionales
-
-- Los archivos de datos se encuentran en el directorio `data` y los resultados (por ejemplo, errores o salidas) se guardan en el directorio `results`.
-- Puedes modificar los tamaños de texto y la cantidad de consultas en `experiments.py` para ajustar la intensidad de las pruebas de rendimiento.
-- La estructura del código permite agregar nuevas optimizaciones o modos de búsqueda sin afectar la interfaz de línea de comandos.
