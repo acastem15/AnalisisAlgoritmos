@@ -18,7 +18,6 @@ def search_v1 (text,sufList,query,results):
     if query==subStrSuf: 
             results.append(f"{halfSuffixPos}-{halfSuffixPos+len(query)-1}")
             #Extend right and left
-            print("VAMO A EXTENDER")
             if index>0: 
                 #Extend left
                 results = extend_v1(results,sufList,query,index-1,"left")
@@ -36,8 +35,7 @@ def search_v1 (text,sufList,query,results):
 
         elif query>subStrSuf:
             search_v1(text,halfRight,query,results)
-    elif numSuf==1 and query!=subStrSuf:
-        print("End recursion")
+
 
     return results
         
@@ -48,18 +46,15 @@ def extend_v1(results,sufList,query,index,sign):
     substrSuf = halfNextSuffixText[0:len(query)]
 
     while query==substrSuf: 
-        print(substrSuf,query,index)
+        #print(substrSuf,query,index)
         results.append(f"{halfNextSuffixPos}-{halfNextSuffixPos+len(query)-1}")
         if sign =="left":
             index-=1
         else:
             index+=1
-        print("HEEEEEY INDEX",index)
         halfNextSuffixText = sufList[index].text
         halfNextSuffixPos = sufList[index].position
         substrSuf = halfNextSuffixText[0:len(query)]
 
-     
-    print("Ya no es igual")
-    return results
+        return results
          
