@@ -65,6 +65,8 @@ def extend_v1(results,sufList,query,index,sign):
             halfNextSuffixText = sufList[index].text
             halfNextSuffixPos = sufList[index].position
             substrSuf = halfNextSuffixText[0:len(query)]
+        else:
+            break
 
     return results
 
