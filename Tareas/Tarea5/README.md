@@ -5,6 +5,37 @@ Este repositorio implementa un sistema de búsqueda sobre un texto utilizando ar
 - **v1:** Utiliza un arreglo de sufijos clásico (sin optimización de espacio).
 - **v2:** Utiliza una versión optimizada que construye un diccionario ordenado (lista de posiciones) para reducir el consumo de memoria.
 
+## Uso del CLI
+
+El script principal se ejecuta a través de `main.py` y utiliza subcomandos para diferenciar los modos de ejecución.
+
+### Ejecución en modo búsqueda
+
+Utiliza el subcomando `search` para procesar un texto y un archivo de consultas. Por ejemplo:
+
+```bash
+python main.py search -f data/texto.txt -v v2 -c data/consulta.txt -r results/resultados.txt
+```
+
+**Parámetros:**
+
+- `-f` o `--file`: Ruta del archivo de texto.
+- `-v` o `--version`: Versión del algoritmo (`v1` o `v2`).
+- `-c` o `--consultas`: Archivo con las consultas (una por línea).
+- `-r` o `--result`: Ruta del archivo donde se guardarán los resultados.
+
+### Ejecución en modo experimentos
+
+Utiliza el subcomando `experiments` para ejecutar pruebas de rendimiento. Por ejemplo:
+
+```bash
+python main.py experiments -v v1
+```
+
+**Parámetros:**
+
+- `-v` o `--version`: Versión del algoritmo a probar (`v1` o `v2`).
+
 ## Estructura del Repositorio
 
 ```
@@ -43,34 +74,3 @@ Este repositorio implementa un sistema de búsqueda sobre un texto utilizando ar
 
 - **experiments.py:**  
   Contiene la función `run_experiments` que genera textos y consultas aleatorias para evaluar el rendimiento de las versiones `v1` y `v2`.
-
-## Uso del CLI
-
-El script principal se ejecuta a través de `main.py` y utiliza subcomandos para diferenciar los modos de ejecución.
-
-### Ejecución en modo búsqueda
-
-Utiliza el subcomando `search` para procesar un texto y un archivo de consultas. Por ejemplo:
-
-```bash
-python main.py search -f data/texto.txt -v v2 -c data/consulta.txt -r results/resultados.txt
-```
-
-**Parámetros:**
-
-- `-f` o `--file`: Ruta del archivo de texto.
-- `-v` o `--version`: Versión del algoritmo (`v1` o `v2`).
-- `-c` o `--consultas`: Archivo con las consultas (una por línea).
-- `-r` o `--result`: Ruta del archivo donde se guardarán los resultados.
-
-### Ejecución en modo experimentos
-
-Utiliza el subcomando `experiments` para ejecutar pruebas de rendimiento. Por ejemplo:
-
-```bash
-python main.py experiments -v v1
-```
-
-**Parámetros:**
-
-- `-v` o `--version`: Versión del algoritmo a probar (`v1` o `v2`).
