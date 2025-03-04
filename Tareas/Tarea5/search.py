@@ -27,8 +27,7 @@ def search_v1 (text,sufList,query,results):
                 results = extend_v1(results,sufList,query,index-1,"left")
             if index<len(sufList)-1:
                 print("righttttt", half,len(sufList))
-                results = extend_v1(results,sufList,query,index,"right")
-                results = extend_v1(results,sufList,query,index,"right")
+                results = extend_v1(results,sufList,query,index-1,"right")
 
 
 
