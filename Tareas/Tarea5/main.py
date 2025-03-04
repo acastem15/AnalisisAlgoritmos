@@ -3,6 +3,7 @@ import argparse
 import suffixArray as sa
 
 from search import search_v1
+from experiments import run_experiments
 
 def main():
     parser = argparse.ArgumentParser(description="Suffix array")
@@ -31,6 +32,9 @@ def main():
     print(textList)
 
     print(search_v1(text,sufList,"gan",[]))
+    
+    
+    run_experiments()
     
 
 

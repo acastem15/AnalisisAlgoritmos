@@ -1,5 +1,7 @@
 
 from suffix import Suffix
+
+
 def suffixList_v1(text):
 
     arrayList = []
