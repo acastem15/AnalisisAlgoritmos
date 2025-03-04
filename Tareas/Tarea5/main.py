@@ -3,6 +3,7 @@ import argparse
 import suffixArray as sa
 
 from search import search_v1
+from experiments import run_experiments
 
 def main():
     parser = argparse.ArgumentParser(description="Suffix array")
@@ -65,6 +66,9 @@ def main():
     consultas.close() 
 
     print()
+    
+    
+    run_experiments()
     
 
 
