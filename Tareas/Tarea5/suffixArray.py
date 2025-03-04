@@ -1,5 +1,6 @@
 
 from suffix import Suffix
+from collections import OrderedDict
 
 
 def suffixList_v1(text):
@@ -20,13 +21,16 @@ def suffixList_v1(text):
 
 def sufPosition (sufList): 
     posList =[]
-    for suf in sufList:
-        posList.append(suf.position)
+    #posList = {suf.position: len(suf.text) for suf in sufList}
+    posList = OrderedDict((suf.position, len(suf.text)) for suf in sufList)
     return posList
+   # print(posList)
+  #  return posList
 
 def sufText (sufList): 
     textList =[]
     for suf in sufList:
         textList.append(suf.text)
     return textList
+
 

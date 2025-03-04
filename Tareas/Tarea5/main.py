@@ -3,6 +3,7 @@ import argparse
 import suffixArray as sa
 
 from search import search_v1
+from search import search_v2
 from experiments import run_experiments
 
 def main():
@@ -36,8 +37,10 @@ def main():
         textList = sa.sufText(sufList)
         
     elif version=="v2": 
-        #Implementar version optimizada
-        pass
+        sufList = sa.suffixList_v1(text)#Lista de objetos del tipo sufijo
+        posList = sa.sufPosition(sufList)
+        #textList = sa.sufText(sufList)
+        del sufList
 
     #print(textList)
     #Leer las consultas
@@ -59,7 +62,15 @@ def main():
             result.write(res)
     elif version=="v2":
         for c in consultas:
-            pass
+            c = c.strip()
+            matches =""
+            for match in search_v2(text,posList,c,[]):
+                matches+=match+" "
+            matches.strip()
+            res = f"{c} {matches}\n"
+            print(c,search_v2(text,posList,c,[]))
+            result.write(res)
+            
             #search_v2(text,sufList,c,[])
         
     result.close()
