@@ -69,7 +69,7 @@ def search_v2(text,posList,query,results):
      # print ("error: ", half in posList)
     end_pos = initial_pos + size -1
     halfSuffixText = text[initial_pos:end_pos]
-    halfSuffixPos = half
+    halfSuffixPos = initial_pos
 
     subStrSuf = halfSuffixText[0:len(query)]
 
