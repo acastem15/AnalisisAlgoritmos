@@ -1,20 +1,19 @@
 import random
-import sys
 import time
 import string
 from suffixArray import suffixList_v1
-from search import search_v1
+from search import search_v2, search_v1
 
 
 
-def run_experiments():
+def run_experiments(version='v2'):
     """
     Realiza pruebas con textos sintéticos de diferentes tamaños y número de consultas.
     Imprime una tabla con los tiempos de ejecución.
     """
     # Definir tamaños de texto y cantidad de consultas
-    text_sizes = [100_000, ]#1_000_000, 10_000_000]
-    query_counts = [1_000, ]#10_000, 100_000, 1_000_000]
+    text_sizes = [100_000, 1_000_000, 10_000_000]
+    query_counts = [1_000, 10_000, 100_000, 1_000_000]
     
     print("\nEjecutando experimentos de rendimiento:")
     print("=" * 80)
@@ -23,7 +22,7 @@ def run_experiments():
     
     for text_size in text_sizes:
         # Generar texto aleatorio (letras minúsculas y espacios)
-        print(f"Generando texto aleatorio de {text_size} caracteres...", file=sys.stderr)
+        print(f"Generando texto aleatorio de {text_size} caracteres...")
         text = ''.join(random.choices(string.ascii_lowercase + ' ', k=text_size))
         
         # Construir el arreglo de sufijos una vez por cada tamaño de texto
@@ -34,7 +33,7 @@ def run_experiments():
         
         for qc in query_counts:
             # Generar consultas aleatorias (subcadenas del texto)
-            print(f"Generando {qc} consultas aleatorias...", file=sys.stderr)
+            print(f"Generando {qc} consultas aleatorias...")
             queries = []
             for _ in range(qc):
                 query_len = random.randint(1, 10)
@@ -45,7 +44,10 @@ def run_experiments():
             # Medir tiempo de procesamiento de consultas
             t0_query = time.perf_counter()
             for query in queries:
-                _ = search_v1(text, suffix_array, query, [])
+                if version == 'v2':
+                    _ = search_v2(text, suffix_array, query, [])
+                else:
+                    _ = search_v1(text, suffix_array, query, [])
             t1_query = time.perf_counter()
             query_time = t1_query - t0_query
             
