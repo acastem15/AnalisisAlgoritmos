@@ -1,8 +1,3 @@
-A continuación se muestra un ejemplo de README.md que documenta la estructura del repositorio, una breve descripción de la implementación y las instrucciones de uso del CLI:
-
----
-
-```markdown
 # Suffix Array CLI y Experimentos
 
 Este repositorio implementa un sistema de búsqueda sobre un texto utilizando arreglos de sufijos, así como un módulo para realizar experimentos de rendimiento. Se han implementado dos versiones del algoritmo de búsqueda:
