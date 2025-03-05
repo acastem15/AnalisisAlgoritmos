@@ -34,9 +34,9 @@ def main():
             sufList = sa.suffixList_v1(text)
             posList = sa.sufPosition(sufList)
         elif args.version == "v2":
-            sufList = sa.suffixList_v1(text)
-            posList = sa.sufPosition(sufList)
-            del sufList
+            posList = sa.suffixList_v2(text)
+            #posList = sa.sufPosition(sufList)
+            #del sufList
 
         # Leer las consultas
         with open(args.consultas, "r") as f:
