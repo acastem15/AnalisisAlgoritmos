@@ -23,10 +23,9 @@ from collections import OrderedDict, defaultdict
 from collections import OrderedDict, defaultdict
 
 def suffixList_v2(text):
-    alphabet = set()  # Conjunto para caracteres únicos
-    arrayDict = defaultdict(list)  # Diccionario de listas
+    alphabet = set() 
+    arrayDict = defaultdict(list)  
 
-    # Construir lista de sufijos por carácter
     for i, character in enumerate(reversed(text)):  
 
         if character not in alphabet:  
